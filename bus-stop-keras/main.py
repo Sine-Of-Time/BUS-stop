@@ -215,7 +215,8 @@ if __name__ == '__main__':
 		unl_dist = unl_probs.mean(0)
 		
 		_ids = np.arange(0,unl_len,unl_len/lab_len).astype('int32') # for downsampling
-		s_conf = euclidean(unl_confs[_ids], p_l_conf)
+		s_conf = cosine(unl_confs[_ids], p_l_conf)
+		#s_conf = euclidean(unl_confs[_ids], p_l_conf)
 		s_class = 1.-cosine(unl_dist, c_u_cali)
 		#logger.info("Epoch {}, s_conf={}, s_class={}".format(epoch,round(s_conf,4),round(s_class,4)))
 		logger.info("Epoch {}, s_conf={}, s_class={}, tst_acc={}, tst_loss={}".format(
@@ -244,5 +245,6 @@ if __name__ == '__main__':
 	logger.info('Final tst_acc : {}, tst_loss : {} \n'.format(round(tst_acc,4),round(tst_loss,4)))
 
 	logger_test.info("{} -> tst_acc : {}, tst_loss : {}".format(task_path,round(tst_acc,4),round(tst_loss,4)))
+
 
 
